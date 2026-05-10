@@ -2640,6 +2640,9 @@ static FLTextInputContext* fltextinputcontext_instance = nil;
 }
 - (void)keyDown:(NSEvent *)theEvent {
   //NSLog(@"keyDown:%@",[theEvent characters]);
+  if (![[theEvent window] isKindOfClass:[FLWindow class]]) { // occurs with #1431
+    return;
+  }
   fl_lock_function();
   Fl_Window *window = [(FLWindow*)[theEvent window] getFl_Window];
   Fl::first_window(window);
